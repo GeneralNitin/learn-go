@@ -37,7 +37,11 @@ func main() {
 		Println("Enter number of tickets:")
 		Scan(&userTicket)
 
-		if userTicket <= remainingTickets {
+		var isValidNames = len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTicketQuantities := userTicket > 0 && userTicket <= remainingTickets
+
+		if isValidNames && isValidEmail && isValidTicketQuantities {
 			remainingTickets -= userTicket
 			bookings = append(bookings, firstName+" "+lastName)
 
@@ -45,8 +49,8 @@ func main() {
 			Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
 
 			// print first names
-			firstNames := []string{}
-			//var firstNames []string // -- alternate syntax
+			var firstNames []string
+			//firstNames := []string{} // -- alternate syntax
 			for _, fullName := range bookings { // _ here is the index
 				var names = strings.Fields(fullName)
 				fName := names[0]
@@ -59,7 +63,15 @@ func main() {
 				break
 			}
 		} else {
-			Printf("You can't book more than the available tickets i.e.: %v\n", remainingTickets)
+			if !isValidNames {
+				Println("First or Last Name is too short")
+			}
+			if !isValidEmail {
+				Println("Email address you entered doesn't contains '@'")
+			}
+			if !isValidTicketQuantities {
+				Println("Number of tickets you entered is invalid")
+			}
 		}
 	}
 
