@@ -7,15 +7,11 @@ func main() {
 	conferenceName := "Go Conference"
 	const conferenceTicket int = 50
 	var remainingTickets uint = 50
-	var bookings [50]string // empty array of size 50
+	var bookings []string // dynamic array
 
 	Printf("Welcome to %v booking application\n", conferenceName)
 	Printf("We have total of %v tickets and %v are still available.\n", conferenceTicket, remainingTickets)
 	Println("Get your tickets here to attend")
-
-	//var bookings = [50]string{"a"} // array of size 50 with 1 element
-	//var bookings = [50]string{} // empty array of size 50
-	//var bookings [50]string // empty array of size 50
 
 	var firstName string
 	var lastName string
@@ -36,7 +32,7 @@ func main() {
 	Scan(&userTicket)
 
 	remainingTickets -= userTicket
-	bookings[0] = firstName + " " + lastName
+	bookings = append(bookings, firstName+" "+lastName)
 
 	Printf("The whole array: %v\n", bookings)
 	Printf("The first value: %v\n", bookings[0])
