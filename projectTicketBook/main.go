@@ -1,6 +1,9 @@
 package main
 
-import . "fmt"
+import (
+	. "fmt"
+	"strings"
+)
 
 func main() {
 
@@ -40,6 +43,16 @@ func main() {
 		Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
 		Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
 
-		Printf("These are all our bookings: %v\n", bookings)
+		// print first names
+		firstNames := []string{}
+		//var firstNames []string // -- alternate syntax
+		for _, fullName := range bookings { // _ here is the index
+			var names = strings.Fields(fullName)
+			fName := names[0]
+			firstNames = append(firstNames, fName)
+		}
+
+		Printf("These are all our bookings: %v\n", firstNames)
 	}
+
 }
