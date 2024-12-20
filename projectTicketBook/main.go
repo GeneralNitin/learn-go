@@ -20,24 +20,26 @@ func main() {
 	var email string
 	var userTicket uint
 
-	// ask user for input
-	Println("Enter your first name:")
-	Scan(&firstName)
+	for {
+		// ask user for input
+		Println("Enter your first name:")
+		Scan(&firstName)
 
-	Println("Enter your last name:")
-	Scan(&lastName)
+		Println("Enter your last name:")
+		Scan(&lastName)
 
-	Println("Enter your email address:")
-	Scan(&email)
+		Println("Enter your email address:")
+		Scan(&email)
 
-	Println("Enter number of tickets:")
-	Scan(&userTicket)
+		Println("Enter number of tickets:")
+		Scan(&userTicket)
 
-	remainingTickets -= userTicket
-	bookings = append(bookings, firstName+" "+lastName)
+		remainingTickets -= userTicket
+		bookings = append(bookings, firstName+" "+lastName)
 
-	Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
-	Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
+		Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
+		Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
 
-	Printf("These are all our bookings: %v\n", bookings)
+		Printf("These are all our bookings: %v\n", bookings)
+	}
 }
