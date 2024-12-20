@@ -8,6 +8,8 @@ func main() {
 	const conferenceTicket int = 50
 	var remainingTickets uint = 50
 	var bookings []string // dynamic array
+	//var bookings = []string{} // --alternative syntax
+	//bookings := []string{} // --alternative syntax
 
 	Printf("Welcome to %v booking application\n", conferenceName)
 	Printf("We have total of %v tickets and %v are still available.\n", conferenceTicket, remainingTickets)
@@ -34,11 +36,8 @@ func main() {
 	remainingTickets -= userTicket
 	bookings = append(bookings, firstName+" "+lastName)
 
-	Printf("The whole array: %v\n", bookings)
-	Printf("The first value: %v\n", bookings[0])
-	Printf("Array type: %T\n", bookings)
-	Printf("Array type: %v\n", len(bookings))
-
 	Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
 	Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
+
+	Printf("These are all our bookings: %v\n", bookings)
 }
