@@ -5,21 +5,26 @@ import (
 	"strings"
 )
 
+// package level variable can't use the short-hand syntax
+// conferenceName := "Go Conference"
+var conferenceName = "Go Conference"
+
+const conferenceTicket int = 50
+
+var remainingTickets uint = 50
+var bookings []string // dynamic array
+
 func main() {
 
-	conferenceName := "Go Conference"
-	const conferenceTicket int = 50
-	var remainingTickets uint = 50
-	var bookings []string // dynamic array
 	//var bookings = []string{} // --alternative syntax
 	//bookings := []string{} // --alternative syntax
 
-	greetUsers(conferenceName, conferenceTicket, remainingTickets)
+	greetUsers()
 
 	for remainingTickets > 0 && len(bookings) < 50 { // for { and for true { is same
 
 		firstName, lastName, email, userTicket := getUserInput()
-		isValidNames, isValidEmail, isValidTicketQuantities := validateUserInput(firstName, lastName, email, userTicket, remainingTickets)
+		isValidNames, isValidEmail, isValidTicketQuantities := validateUserInput(firstName, lastName, email, userTicket)
 
 		if isValidNames && isValidEmail && isValidTicketQuantities {
 
@@ -103,13 +108,13 @@ func getFirstNames(bookings []string) []string {
 	return firstNames
 }
 
-func greetUsers(confName string, conferenceTicket int, remainingTickets uint) {
-	Printf("Welcome to %v booking application\n", confName)
+func greetUsers() {
+	Printf("Welcome to %v booking application\n", conferenceName)
 	Printf("We have total of %v tickets and %v are still available.\n", conferenceTicket, remainingTickets)
 	Println("Get your tickets here to attend")
 }
 
-func validateUserInput(firstName string, lastName string, email string, userTicket uint, remainingTickets uint) (bool, bool, bool) {
+func validateUserInput(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
 	var isValidNames = len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
 	isValidTicketQuantities := userTicket > 0 && userTicket <= remainingTickets
