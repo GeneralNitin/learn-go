@@ -28,10 +28,10 @@ func main() {
 
 		if isValidNames && isValidEmail && isValidTicketQuantities {
 
-			bookTicket(remainingTickets, userTicket, bookings, firstName, lastName, email, conferenceName)
+			bookTicket(userTicket, firstName, lastName, email)
 
 			//printFirstName(bookings)
-			firstNames := getFirstNames(bookings)
+			firstNames := getFirstNames()
 			Printf("The first names of bookings are: %v\n", firstNames)
 
 			if remainingTickets == 0 {
@@ -52,7 +52,7 @@ func main() {
 	}
 }
 
-func bookTicket(remainingTickets uint, userTicket uint, bookings []string, firstName string, lastName string, email string, conferenceName string) {
+func bookTicket(userTicket uint, firstName string, lastName string, email string) {
 	remainingTickets -= userTicket
 	bookings = append(bookings, firstName+" "+lastName)
 
@@ -95,7 +95,7 @@ func printFirstName(bookings []string) {
 	Printf("The first names of bookings are: %v\n", firstNames)
 }
 
-func getFirstNames(bookings []string) []string {
+func getFirstNames() []string {
 	// print first names
 	var firstNames []string
 	//firstNames := []string{} // -- alternate syntax
