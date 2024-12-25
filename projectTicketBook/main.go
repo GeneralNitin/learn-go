@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesomeProject/projectTicketBook/helper"
 	. "fmt"
 	"strings"
 )
@@ -24,7 +25,7 @@ func main() {
 	for remainingTickets > 0 && len(bookings) < 50 { // for { and for true { is same
 
 		firstName, lastName, email, userTicket := getUserInput()
-		isValidNames, isValidEmail, isValidTicketQuantities := ValidateUserInput(firstName, lastName, email, userTicket)
+		isValidNames, isValidEmail, isValidTicketQuantities := helper.ValidateUserInput(firstName, lastName, email, userTicket, remainingTickets)
 
 		if isValidNames && isValidEmail && isValidTicketQuantities {
 
