@@ -3,6 +3,7 @@ package main
 import (
 	"awesomeProject/projectTicketBook/helper"
 	. "fmt"
+	"sync"
 	"time"
 
 	//"strconv"
@@ -26,6 +27,8 @@ type UserData struct {
 	numberOfTickets uint
 }
 
+var wg = sync.WaitGroup{}
+
 func main() {
 
 	//var bookings = []string{} // --alternative syntax
@@ -33,36 +36,38 @@ func main() {
 
 	greetUsers()
 
-	for remainingTickets > 0 && len(bookings) < 50 { // for { and for true { is same
+	//for remainingTickets > 0 && len(bookings) < 50 { // for { and for true { is same
 
-		firstName, lastName, email, userTicket := getUserInput()
-		isValidNames, isValidEmail, isValidTicketQuantities := helper.ValidateUserInput(firstName, lastName, email, userTicket, remainingTickets)
+	firstName, lastName, email, userTicket := getUserInput()
+	isValidNames, isValidEmail, isValidTicketQuantities := helper.ValidateUserInput(firstName, lastName, email, userTicket, remainingTickets)
 
-		if isValidNames && isValidEmail && isValidTicketQuantities {
+	if isValidNames && isValidEmail && isValidTicketQuantities {
 
-			bookTicket(userTicket, firstName, lastName, email)
+		bookTicket(userTicket, firstName, lastName, email)
 
-			go sendTicket(userTicket, firstName, lastName, email)
-			//printFirstName(bookings)
-			firstNames := getFirstNames()
-			Printf("The first names of bookings are: %v\n", firstNames)
+		wg.Add(1)
+		go sendTicket(userTicket, firstName, lastName, email)
+		//printFirstName(bookings)
+		firstNames := getFirstNames()
+		Printf("The first names of bookings are: %v\n", firstNames)
 
-			if remainingTickets == 0 {
-				Println("Our conference is booked out. Come back next year.")
-				break
-			}
-		} else {
-			if !isValidNames {
-				Println("First or Last Name is too short")
-			}
-			if !isValidEmail {
-				Println("Email address you entered doesn't contains '@'")
-			}
-			if !isValidTicketQuantities {
-				Println("Number of tickets you entered is invalid")
-			}
+		if remainingTickets == 0 {
+			Println("Our conference is booked out. Come back next year.")
+		}
+	} else {
+		if !isValidNames {
+			Println("First or Last Name is too short")
+		}
+		if !isValidEmail {
+			Println("Email address you entered doesn't contains '@'")
+		}
+		if !isValidTicketQuantities {
+			Println("Number of tickets you entered is invalid")
 		}
 	}
+	//}
+
+	wg.Wait()
 }
 
 func bookTicket(userTicket uint, firstName string, lastName string, email string) {
@@ -148,6 +153,8 @@ func sendTicket(userTickets uint, firstName string, lastName string, email strin
 	Println("#####################")
 	Printf("Sending ticket:\n%v to email address %v\n", ticket, email)
 	Println("#####################")
+
+	wg.Done()
 }
 
 //func validateUserInput(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
