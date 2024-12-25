@@ -3,6 +3,8 @@ package main
 import (
 	"awesomeProject/projectTicketBook/helper"
 	. "fmt"
+	"time"
+
 	//"strconv"
 	"strings"
 )
@@ -40,7 +42,7 @@ func main() {
 
 			bookTicket(userTicket, firstName, lastName, email)
 
-			sendTicket(userTicket, firstName, lastName, email)
+			go sendTicket(userTicket, firstName, lastName, email)
 			//printFirstName(bookings)
 			firstNames := getFirstNames()
 			Printf("The first names of bookings are: %v\n", firstNames)
@@ -141,6 +143,7 @@ func greetUsers() {
 }
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string) {
+	time.Sleep(10 * time.Second)
 	var ticket = Sprintf("%v tickets for %v, %v", userTickets, firstName, lastName)
 	Println("#####################")
 	Printf("Sending ticket:\n%v to email address %v\n", ticket, email)
