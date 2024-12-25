@@ -24,7 +24,7 @@ func main() {
 	for remainingTickets > 0 && len(bookings) < 50 { // for { and for true { is same
 
 		firstName, lastName, email, userTicket := getUserInput()
-		isValidNames, isValidEmail, isValidTicketQuantities := validateUserInput(firstName, lastName, email, userTicket)
+		isValidNames, isValidEmail, isValidTicketQuantities := ValidateUserInput(firstName, lastName, email, userTicket)
 
 		if isValidNames && isValidEmail && isValidTicketQuantities {
 
@@ -114,10 +114,10 @@ func greetUsers() {
 	Println("Get your tickets here to attend")
 }
 
-func validateUserInput(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
-	var isValidNames = len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketQuantities := userTicket > 0 && userTicket <= remainingTickets
-
-	return isValidNames, isValidEmail, isValidTicketQuantities
-}
+//func validateUserInput(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
+//	var isValidNames = len(firstName) >= 2 && len(lastName) >= 2
+//	isValidEmail := strings.Contains(email, "@")
+//	isValidTicketQuantities := userTicket > 0 && userTicket <= remainingTickets
+//
+//	return isValidNames, isValidEmail, isValidTicketQuantities
+//}

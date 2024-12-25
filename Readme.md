@@ -1,5 +1,13 @@
 ## Go
 
+### CLI Commands
+```
+go run <file_name1>, <file_name1>
+
+go run .
+
+go build 
+```
 ### Section 1: Variables
 <details>
 <summary>Variables in Go</summary>
