@@ -3,7 +3,7 @@ package main
 import (
 	"awesomeProject/projectTicketBook/helper"
 	. "fmt"
-	"strconv"
+	//"strconv"
 	"strings"
 )
 
@@ -14,7 +14,15 @@ var conferenceName = "Go Conference"
 const conferenceTicket int = 50
 
 var remainingTickets uint = 50
-var bookings = make([]map[string]string, 0) // dynamic array
+var bookings = make([]UserData, 0) // dynamic array
+//var bookings []UserData // dynamic array
+
+type UserData struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
 
 func main() {
 
@@ -58,11 +66,18 @@ func bookTicket(userTicket uint, firstName string, lastName string, email string
 	remainingTickets -= userTicket
 
 	// create a map for a use
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["userTicket"] = strconv.FormatUint(uint64(userTicket), 10)
+	var userData = UserData{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTicket,
+	}
+
+	//var userData = make(map[string]string)
+	//userData["firstName"] = firstName
+	//userData["lastName"] = lastName
+	//userData["email"] = email
+	//userData["userTicket"] = strconv.FormatUint(uint64(userTicket), 10)
 
 	bookings = append(bookings, userData)
 	Printf("List of bookings is %v\n", bookings)
@@ -111,7 +126,7 @@ func getFirstNames() []string {
 	var firstNames []string
 	//firstNames := []string{} // -- alternate syntax
 	for _, booking := range bookings { // _ here is the index
-		name := booking["firstName"] + booking["lastName"]
+		name := booking.firstName + booking.lastName
 		firstNames = append(firstNames, name)
 	}
 
