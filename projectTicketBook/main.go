@@ -3,6 +3,7 @@ package main
 import (
 	"awesomeProject/projectTicketBook/helper"
 	. "fmt"
+	"strconv"
 	"strings"
 )
 
@@ -13,7 +14,7 @@ var conferenceName = "Go Conference"
 const conferenceTicket int = 50
 
 var remainingTickets uint = 50
-var bookings []string // dynamic array
+var bookings = make([]map[string]string, 0) // dynamic array
 
 func main() {
 
@@ -55,7 +56,16 @@ func main() {
 
 func bookTicket(userTicket uint, firstName string, lastName string, email string) {
 	remainingTickets -= userTicket
-	bookings = append(bookings, firstName+" "+lastName)
+
+	// create a map for a use
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["userTicket"] = strconv.FormatUint(uint64(userTicket), 10)
+
+	bookings = append(bookings, userData)
+	Printf("List of bookings is %v\n", bookings)
 
 	Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTicket, email)
 	Printf("%v tikcets remaining for %v\n", remainingTickets, conferenceName)
@@ -100,10 +110,9 @@ func getFirstNames() []string {
 	// print first names
 	var firstNames []string
 	//firstNames := []string{} // -- alternate syntax
-	for _, fullName := range bookings { // _ here is the index
-		var names = strings.Fields(fullName)
-		fName := names[0]
-		firstNames = append(firstNames, fName)
+	for _, booking := range bookings { // _ here is the index
+		name := booking["firstName"] + booking["lastName"]
+		firstNames = append(firstNames, name)
 	}
 
 	return firstNames
