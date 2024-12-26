@@ -44,3 +44,19 @@
 - Resources:
   - go.dev
   - pkg.go.dev -- has all the packages
+
+- GO ENV
+  - go evn -- command
+  - GOOS="windows" go build
+  - GOOS="linux" GOARCH="arm64" go build
+
+- Memory Management
+  - new()
+    - Allocate memory but no INIT
+    - you will a memory address
+    - zeroed storage
+  - make()
+    - Allocate memory and INIT
+    - you will get a memory address
+    - non-zeroed storage
+  - pkg.go.dev/runtime
