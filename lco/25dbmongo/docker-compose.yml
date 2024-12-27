@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  my-mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Welcome@123
+    ports:
+      - 27017:27017
+    volumes:
+      - my-mongo-data:/data/db
+
+volumes:
+  my-mongo-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./local-mongo-data
