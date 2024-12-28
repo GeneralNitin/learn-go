@@ -8,6 +8,10 @@ import (
 
 var wg sync.WaitGroup // usually it is a pointer
 
+// mutex
+var signals = []string{"test"}
+var mut sync.Mutex
+
 func main() {
 	//go greeter("Hello")
 	//greeter("World")
@@ -24,7 +28,8 @@ func main() {
 		wg.Add(1)
 	}
 
-	defer wg.Wait()
+	wg.Wait()
+	fmt.Println(signals)
 }
 
 //func greeter(s string) {
@@ -41,6 +46,10 @@ func getStatusCode(site string) {
 	if err != nil {
 		fmt.Println("Error occurred: ", err.Error())
 	} else {
+		mut.Lock()
+		signals = append(signals, site)
+		mut.Unlock()
+
 		fmt.Printf("%v status code for the site: %v\n", get.StatusCode, site)
 	}
 }
