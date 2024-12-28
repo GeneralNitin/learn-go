@@ -20,16 +20,6 @@ go build
     ```go
     a := 10
     ```
--  Infinite Loop
-    ```go
-    for  {
-        // do something
-    }
-   // OR 
-    for true  {
-        // do something
-    }
-    ```
 </details>
 
 
@@ -99,5 +89,8 @@ go build
             var v TestStruct // type TestStruct
         }
     ```
+
+### Section 6: interfaces ?
+### Section 7: concurrency/waitGroups(making the main thread wait)/mutex(remove race condition)/channels(passing data to routines) ?
 
 
