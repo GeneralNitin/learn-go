@@ -91,6 +91,10 @@ go build
     ```
 
 ### Section 6: interfaces ?
-### Section 7: concurrency/waitGroups(making the main thread wait)/mutex(remove race condition)/channels(passing data to routines) ?
+
+### Section 7: Pointers
+
+### Section 8: concurrency/waitGroups(making the main thread wait)/mutex(remove race condition)/channels(passing data to routines) ?
+
 
 
