@@ -107,5 +107,8 @@ https://go.dev/tour/list
 
 ### Section 8: concurrency/waitGroups(making the main thread wait)/mutex(remove race condition)/channels(passing data to routines) ?
 
+### Misc:
+Returning a function or array of functions from a function
 
+### Functional style programming is possible ?
 
