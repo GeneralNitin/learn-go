@@ -90,9 +90,20 @@ go build
         }
     ```
 
-### Section 6: interfaces ?
+### Section 6: Interfaces ?
 
-### Section 7: Pointers
+### Section 7: Pointers ?
+
+### Section 8: Modules ?
+
+### Section 9: Generics ?
+Type function: https://www.youtube.com/watch?v=pR5nQ6N6-YA
+
+### Section 9: Context Package // Part of Concurrency ?
+https://www.youtube.com/watch?v=uiUCIz-3CWM
+https://www.youtube.com/watch?v=kaZOXRqFPCw
+https://www.youtube.com/watch?v=LSzR0VEraWw
+https://go.dev/tour/list
 
 ### Section 8: concurrency/waitGroups(making the main thread wait)/mutex(remove race condition)/channels(passing data to routines) ?
 
