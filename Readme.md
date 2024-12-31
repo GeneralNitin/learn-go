@@ -109,6 +109,7 @@ https://go.dev/tour/list
 
 ### Misc:
 Returning a function or array of functions from a function
+New vs Make
 
 ### Functional style programming is possible ?
 

@@ -53,7 +53,7 @@
 - Memory Management
   - new()
     - Allocate memory but no INIT
-    - you will a memory address
+    - you will get a memory address
     - zeroed storage
   - make()
     - Allocate memory and INIT
