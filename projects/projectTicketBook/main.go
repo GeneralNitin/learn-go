@@ -1,7 +1,7 @@
 package main
 
 import (
-	"awesomeProject/projectTicketBook/helper"
+	"awesomeProject/projects/projectTicketBook/helper"
 	. "fmt"
 	"sync"
 	"time"
