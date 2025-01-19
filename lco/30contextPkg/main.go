@@ -10,7 +10,7 @@ import (
 func main() {
 	start := time.Now()
 
-	ctx := context.Background()
+	ctx := context.WithValue(context.Background(), "correlationId", "1234")
 	userId := 10
 
 	val, err := callApi(ctx, userId)
@@ -29,6 +29,9 @@ type Response struct {
 }
 
 func callApi(ctx context.Context, userId int) (int, error) {
+	value := ctx.Value("correlationId")
+	fmt.Println("correlationId passed from parent context:", value)
+
 	ctx, cancel := context.WithTimeout(ctx, time.Millisecond*200)
 	defer cancel()
 
