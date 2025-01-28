@@ -13,8 +13,10 @@ func main() {
 
 	wg := sync.WaitGroup{}
 
-	wg.Add(2)
+	wg.Add(1)
 	go func() {
+		defer wg.Done()
+		wg.Add(2)
 		//defer wg.Done()
 		//clientCall(fpResultChan)
 		//defer wg.Done()
