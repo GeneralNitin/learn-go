@@ -35,10 +35,15 @@ func main() {
 
 func clientCall(wg *sync.WaitGroup, resultChan chan int) {
 	defer wg.Done()
-	for i := 0; i < 10; i++ {
-		time.Sleep(100 * time.Millisecond)
-		resultChan <- i + 1
-		fmt.Println("Writing: ", i)
+	for i := 0; i < 3; i++ {
+		time.Sleep(100 * time.Nanosecond)
+		if i%2 == 0 {
+			data := i + 1
+			resultChan <- data
+			fmt.Println("Writing: ", data)
+		} else {
+			//fmt.Println("Skipping: ", i)
+		}
 	}
 	close(resultChan)
 }
@@ -57,6 +62,6 @@ func processResponse(wg *sync.WaitGroup, resultChan chan int) {
 }
 
 func consumeResponse(res int) {
-	time.Sleep(250 * time.Millisecond)
-	fmt.Println("Result: ", res)
+	time.Sleep(100 * time.Millisecond)
+	fmt.Println("Consumed: ", res)
 }
