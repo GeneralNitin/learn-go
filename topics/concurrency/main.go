@@ -9,7 +9,7 @@ import (
 func main() {
 	//ctxFp := context.Background()
 	//context.WithTimeout(context.Background(), 100*time.Second)
-	fpResultChan := make(chan int, 10)
+	fpResultChan := make(chan int, 2)
 
 	wg := sync.WaitGroup{}
 
@@ -35,33 +35,36 @@ func main() {
 
 func clientCall(wg *sync.WaitGroup, resultChan chan int) {
 	defer wg.Done()
-	for i := 0; i < 3; i++ {
+	defer func() {
+		fmt.Println("Will Close The Channel")
+		close(resultChan)
+	}()
+	for i := 0; i < 10; i++ {
 		time.Sleep(100 * time.Nanosecond)
 		if i%2 == 0 {
-			data := i + 1
+			data := i
 			resultChan <- data
 			fmt.Println("Writing: ", data)
 		} else {
 			//fmt.Println("Skipping: ", i)
 		}
 	}
-	close(resultChan)
 }
 
 func processResponse(wg *sync.WaitGroup, resultChan chan int) {
 	defer wg.Done()
-	for {
-		select {
-		case res, ok := <-resultChan:
-			if !ok {
-				return
-			}
-			consumeResponse(res)
-		}
+	for res := range resultChan {
+		//select {
+		//case res, ok := <-resultChan:
+		//	if !ok {
+		//		return
+		//	}
+		consumeResponse(res)
+		//}
 	}
 }
 
 func consumeResponse(res int) {
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(2 * time.Second)
 	fmt.Println("Consumed: ", res)
 }
