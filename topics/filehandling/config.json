@@ -1,0 +1,6 @@
+{
+  "config": {
+    "log-level": "info",
+    "port": "8080"
+  }
+}
